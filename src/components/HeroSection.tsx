@@ -4,7 +4,7 @@ import { Heart, Copy, CheckCircle, Phone, ShoppingBag } from 'lucide-react';
 const HeroSection = () => {
   const [pixCopied, setPixCopied] = useState(false);
   const pixKey = "011.970.271-14"; // 🔹 Substitua pela chave Pix real
-  const whatsappNumber = "5561999999999"; // 🔹 Substitua pelo número real (com DDI/DDD para link WhatsApp)
+  const whatsappNumber = "5561982590294"; // 🔹 Substitua pelo número real (com DDI/DDD para link WhatsApp)
 
   const copyPix = () => {
     navigator.clipboard.writeText(pixKey);
