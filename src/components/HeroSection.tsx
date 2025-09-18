@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Heart, Copy, CheckCircle } from 'lucide-react';
+import { Heart, Copy, CheckCircle, Phone } from 'lucide-react';
 
 const HeroSection = () => {
   const [pixCopied, setPixCopied] = useState(false);
   const pixKey = "011.970.271-14"; // Substitua pela chave Pix real
+  const whatsappNumber = "(61) 9 9999-9999"; // 🔹 Substitua pelo número real
 
   const copyPix = () => {
     navigator.clipboard.writeText(pixKey);
@@ -66,7 +67,8 @@ const HeroSection = () => {
           </p>
         </div>
 
-        {/* Seção PIX com design moderno */}
+       
+        {/* Seção PIX */}
         <div className="bg-white/80 backdrop-blur-lg rounded-3xl p-10 shadow-2xl border border-white/30 max-w-2xl mx-auto">
           <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent mb-6">
             Faça sua doação via PIX
@@ -95,7 +97,21 @@ const HeroSection = () => {
               </>
             )}
           </button>
-          
+
+          {/* 🔹 NOVA SEÇÃO: Envio do comprovante */}
+          <div className="mt-10 bg-green-50 border border-green-200 rounded-xl p-6 shadow-md">
+            <div className="flex items-center justify-center gap-3 mb-2">
+              <Phone className="h-6 w-6 text-green-600" />
+              <h4 className="text-lg font-bold text-green-700">
+                Envie seu comprovante
+              </h4>
+            </div>
+            <p className="text-xl font-semibold text-gray-800">{whatsappNumber}</p>
+            <p className="text-sm text-gray-600 mt-2">
+              Mande seu comprovante nesse WhatsApp para confirmarmos sua doação 💚
+            </p>
+          </div>
+
           <p className="text-sm text-gray-600 mt-6 font-medium">
             Clique para copiar a chave PIX e fazer sua doação
           </p>
