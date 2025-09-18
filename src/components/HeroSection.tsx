@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { Heart, Copy, CheckCircle, Phone } from 'lucide-react';
+import { Heart, Copy, CheckCircle, Phone, ShoppingBag } from 'lucide-react';
 
 const HeroSection = () => {
   const [pixCopied, setPixCopied] = useState(false);
-  const pixKey = "011.970.271-14"; // Substitua pela chave Pix real
-  const whatsappNumber = "(61) 9 9999-9999"; // 🔹 Substitua pelo número real
+  const pixKey = "011.970.271-14"; // 🔹 Substitua pela chave Pix real
+  const whatsappNumber = "5561999999999"; // 🔹 Substitua pelo número real (com DDI/DDD para link WhatsApp)
 
   const copyPix = () => {
     navigator.clipboard.writeText(pixKey);
     setPixCopied(true);
     setTimeout(() => setPixCopied(false), 2000);
   };
+
+  const whatsappLink = `https://wa.me/${whatsappNumber}`;
 
   return (
     <section className="bg-gradient-to-br from-blue-50 via-white to-green-50 min-h-screen flex items-center px-4 py-12 relative overflow-hidden">
@@ -20,18 +22,18 @@ const HeroSection = () => {
       <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-blue-200/20 rounded-full blur-lg animate-bounce"></div>
       
       <div className="max-w-5xl mx-auto text-center relative z-10">
-        {/* Título Principal com gradiente */}
+        {/* Título Principal */}
         <div className="mb-12">
-          <h1 className="text-5xl md:text-7xl font-extrabold text-blue-600 mb-6 leading-tight animate-fade-in">
+          <h1 className="text-5xl md:text-7xl font-extrabold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent mb-6 leading-tight tracking-wide">
             Corrente do Bem
           </h1>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-700 mb-8 animate-slide-up">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-700 mb-8">
             Juntos pela Solidariedade
           </h2>
         </div>
 
-        {/* Card principal com glassmorphism */}
-        <div className="bg-white/70 backdrop-blur-lg rounded-3xl p-8 md:p-12 shadow-2xl mb-12 border border-white/20 transform hover:scale-105 transition-all duration-500">
+        {/* Card principal */}
+        <div className="bg-white/80 backdrop-blur-lg rounded-3xl p-8 md:p-12 shadow-2xl mb-12 border border-white/30">
           <div className="flex justify-center mb-8">
             <div className="relative">
               <Heart className="h-16 w-16 text-red-500 animate-pulse" />
@@ -52,11 +54,12 @@ const HeroSection = () => {
           </p>
           
           {/* Destaque do valor */}
-          <div className="bg-green-500 p-8 rounded-2xl mb-10 shadow-lg transform hover:scale-105 transition-all duration-300">
-            <p className="text-2xl md:text-3xl font-bold text-white mb-2">
+          <div className="bg-gradient-to-r from-green-500 to-green-600 p-8 rounded-2xl mb-10 shadow-xl flex flex-col items-center gap-3">
+            <ShoppingBag className="h-12 w-12 text-white" />
+            <p className="text-2xl md:text-3xl font-bold text-white">
               Valor super acessível!
             </p>
-            <p className="text-4xl md:text-5xl font-extrabold text-white">
+            <p className="text-4xl md:text-5xl font-extrabold text-white drop-shadow-lg">
               R$ 47,00 = 1 cesta básica
             </p>
           </div>
@@ -67,9 +70,8 @@ const HeroSection = () => {
           </p>
         </div>
 
-       
         {/* Seção PIX */}
-        <div className="bg-white/80 backdrop-blur-lg rounded-3xl p-10 shadow-2xl border border-white/30 max-w-2xl mx-auto">
+        <div className="bg-white/90 backdrop-blur-lg rounded-3xl p-10 shadow-2xl border border-white/40 max-w-2xl mx-auto">
           <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent mb-6">
             Faça sua doação via PIX
           </h3>
@@ -83,39 +85,44 @@ const HeroSection = () => {
           
           <button
             onClick={copyPix}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-5 px-10 rounded-full text-2xl shadow-2xl transform transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-blue-300 flex items-center gap-4 mx-auto animate-bounce hover:animate-none"
+            className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-4 px-10 rounded-full text-xl shadow-lg transform transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 flex items-center gap-3 mx-auto"
           >
             {pixCopied ? (
               <>
-                <CheckCircle className="h-8 w-8" />
+                <CheckCircle className="h-7 w-7" />
                 PIX Copiado!
               </>
             ) : (
               <>
-                <Copy className="h-8 w-8" />
+                <Copy className="h-7 w-7" />
                 Copiar PIX
               </>
             )}
           </button>
-             <p className="text-sm text-gray-600 mt-6 font-medium">
-            Clique para copiar a chave PIX e fazer sua doação
+          <p className="text-sm text-gray-600 mt-4 font-medium">
+            Clique no botão para copiar a chave e fazer sua doação
           </p>
 
-          {/* 🔹 NOVA SEÇÃO: Envio do comprovante */}
+          {/* Envio do comprovante */}
           <div className="mt-10 bg-green-50 border border-green-200 rounded-xl p-6 shadow-md">
-            <div className="flex items-center justify-center gap-3 mb-2">
+            <div className="flex items-center justify-center gap-3 mb-3">
               <Phone className="h-6 w-6 text-green-600" />
               <h4 className="text-lg font-bold text-green-700">
                 Envie seu comprovante
               </h4>
             </div>
-            <p className="text-xl font-semibold text-gray-800">{whatsappNumber}</p>
-            <p className="text-sm text-gray-600 mt-2">
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 mx-auto max-w-xs"
+            >
+              WhatsApp: (61) 9 9999-9999
+            </a>
+            <p className="text-sm text-gray-600 mt-3">
               Mande seu comprovante nesse WhatsApp para confirmarmos sua doação 💚
             </p>
           </div>
-
-       
         </div>
       </div>
     </section>
