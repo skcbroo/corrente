@@ -14,7 +14,7 @@ export function DonorsTable() {
   });
 
   if (loading) {
-    return <p>⏳ Carregando doadores...</p>;
+    return <p> Carregando doadores...</p>;
   }
 
   if (error) {
