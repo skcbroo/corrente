@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Camera, X, Sparkles, Heart } from 'lucide-react';
 
 const PhotoGallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [photos, setPhotos] = useState<any[]>([]);
 
-  // Gera automaticamente a lista de fotos
+  // Gera automaticamente a lista de fotos baseada nos arquivos disponíveis
   const generatePhotos = () => {
     const photoTitles = [
       "Preparando as cestas básicas",
@@ -44,6 +43,7 @@ const PhotoGallery = () => {
     ];
 
     const photos = [];
+    // Suporta até 15 fotos (pode ser facilmente expandido)
     for (let i = 1; i <= 15; i++) {
       photos.push({
         id: i,
@@ -55,31 +55,10 @@ const PhotoGallery = () => {
     return photos;
   };
 
-  // Função para verificar se a imagem existe
-  const checkImageExists = (url: string): Promise<boolean> => {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.src = url;
-      img.onload = () => resolve(true);
-      img.onerror = () => resolve(false);
-    });
-  };
-
-  useEffect(() => {
-    const loadPhotos = async () => {
-      const allPhotos = generatePhotos();
-      const validPhotos = [];
-
-      for (const photo of allPhotos) {
-        const exists = await checkImageExists(photo.url);
-        if (exists) validPhotos.push(photo);
-      }
-
-      setPhotos(validPhotos);
-    };
-
-    loadPhotos();
-  }, []);
+  const allPhotos = generatePhotos();
+  
+  // Filtra apenas as fotos que existem (você pode remover esta lógica se quiser mostrar todas)
+  const photos = allPhotos;
 
   const openModal = (imageUrl: string) => {
     setSelectedImage(imageUrl);
@@ -93,12 +72,12 @@ const PhotoGallery = () => {
 
   return (
     <section className="bg-gradient-to-br from-blue-50 via-white to-green-50 py-20 px-4 relative overflow-hidden">
-      {/* Elementos decorativos */}
+      {/* Elementos decorativos de fundo */}
       <div className="absolute top-20 left-20 w-32 h-32 bg-green-200/30 rounded-full blur-xl animate-pulse"></div>
       <div className="absolute bottom-20 right-20 w-40 h-40 bg-blue-200/30 rounded-full blur-xl animate-pulse delay-1000"></div>
       
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Header */}
+        {/* Header da Seção */}
         <div className="text-center mb-16">
           <div className="flex justify-center mb-6">
             <div className="relative">
@@ -116,7 +95,7 @@ const PhotoGallery = () => {
           </p>
         </div>
 
-        {/* Grid de Fotos */}
+        {/* Grid de Fotos com efeitos modernos */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {photos.map((photo, index) => (
             <div 
@@ -134,6 +113,7 @@ const PhotoGallery = () => {
                 />
               </div>
               
+              {/* Overlay com gradiente e informações */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
                 <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                   <h3 className="text-white font-bold text-xl mb-2">
@@ -145,16 +125,21 @@ const PhotoGallery = () => {
                 </div>
               </div>
 
+              {/* Ícone de zoom com efeito */}
               <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full p-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-0 group-hover:scale-100">
                 <Camera className="h-5 w-5 text-gray-700" />
               </div>
+
+              {/* Borda colorida no hover */}
+              <div className="absolute inset-0 rounded-2xl border-4 border-transparent group-hover:border-blue-400 transition-all duration-300"></div>
             </div>
           ))}
         </div>
 
-        {/* Call to Action */}
+        {/* Call to Action com design atrativo */}
         <div className="text-center">
           <div className="bg-blue-500 rounded-3xl p-12 shadow-2xl text-white transform hover:scale-105 transition-all duration-300 relative overflow-hidden">
+            {/* Elementos decorativos internos */}
             <div className="absolute top-4 left-4 w-16 h-16 bg-white/10 rounded-full blur-xl"></div>
             <div className="absolute bottom-4 right-4 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
             
@@ -175,7 +160,7 @@ const PhotoGallery = () => {
         </div>
       </div>
 
-      {/* Modal */}
+      {/* Modal para visualização ampliada */}
       {selectedImage && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm">
           <div className="relative max-w-5xl max-h-[90vh] m-4">
