@@ -36,6 +36,24 @@ export const useDonors = () => {
       const msg = err instanceof Error ? err.message : "Erro ao carregar doadores";
       setError(msg);
       console.error("❌ [useDonors] Erro ao buscar doadores:", err);
+
+      // 🔔 Mostra erro visível na tela
+      if (typeof window !== "undefined") {
+        const banner = document.createElement("div");
+        banner.innerText = `❌ Falha ao carregar doadores: ${msg}`;
+        banner.style.position = "fixed";
+        banner.style.bottom = "10px";
+        banner.style.left = "10px";
+        banner.style.padding = "10px 20px";
+        banner.style.background = "#dc2626"; // vermelho
+        banner.style.color = "white";
+        banner.style.fontWeight = "bold";
+        banner.style.borderRadius = "8px";
+        banner.style.zIndex = "9999";
+        document.body.appendChild(banner);
+
+        setTimeout(() => banner.remove(), 6000); // some depois de 6s
+      }
     } finally {
       setLoading(false);
     }
