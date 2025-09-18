@@ -42,7 +42,8 @@ const HeroSection = () => {
           </div>
           
           <p className="text-xl md:text-2xl text-gray-700 leading-relaxed mb-8 max-w-4xl mx-auto font-medium">
-            Opa, tudo bem? Estamos iniciando uma <span className="text-blue-600 font-bold">corrente do bem</span>: 
+            Opa, tudo bem? 
+            Estamos iniciando uma <span className="text-blue-600 font-bold">corrente do bem</span>: 
             vamos arrecadar cestas básicas para doar a instituições que precisam. A cada ação, ajudaremos um 
             local diferente, e nesta primeira vez escolhemos apoiar uma <span className="text-green-600 font-bold">creche</span> onde 
             uma amiga nossa trabalha.
