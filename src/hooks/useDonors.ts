@@ -74,7 +74,8 @@ export const useDonors = () => {
   };
 
   const totalArrecadado = donors.reduce((sum, donor) => sum + donor.amount, 0);
-  const totalCestas = Math.floor(totalArrecadado / 47);
+    const totalCestas = (totalArrecadado / 47).toFixed(1);
+
 
   return {
     donors,
