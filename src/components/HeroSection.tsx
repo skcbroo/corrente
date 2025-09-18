@@ -117,7 +117,7 @@ const HeroSection = () => {
               rel="noopener noreferrer"
               className="block bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 mx-auto max-w-xs"
             >
-              WhatsApp: (61) 9 9999-9999
+              WhatsApp: (61) 98259-0294
             </a>
             <p className="text-sm text-gray-600 mt-3">
               Mande seu comprovante nesse WhatsApp para confirmarmos sua doação 💚
