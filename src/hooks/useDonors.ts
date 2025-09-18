@@ -1,64 +1,49 @@
-import { useDonors } from "../hooks/useDonors";
+export const useDonors = () => {
+  const [donors, setDonors] = useState<Donor[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
 
-export function DonorsTable() {
-  const { donors, loading, error, lastUpdated, totalArrecadado, totalCestas } = useDonors();
+  const fetchDonors = async () => {
+    try {
+      setLoading(true);
+      setError(null);
 
-  console.log("📊 [DonorsTable] Renderizou");
-  console.log("🔄 [DonorsTable] Estado:", {
+      const donorData = await googleSheetsService.getDonors();
+
+      const donorsWithId = donorData.map((donor, index) => ({
+        ...donor,
+        id: index + 1,
+      }));
+
+      setDonors(donorsWithId);
+      setLastUpdated(new Date());
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Erro ao carregar doadores");
+      console.error("Erro ao buscar doadores:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchDonors();
+    const interval = setInterval(fetchDonors, 5 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const refreshDonors = () => fetchDonors();
+
+  const totalArrecadado = donors.reduce((sum, donor) => sum + donor.amount, 0);
+  const totalCestas = Math.floor(totalArrecadado / 47);
+
+  return {
+    donors,
     loading,
     error,
-    donors,
     lastUpdated,
+    refreshDonors,
     totalArrecadado,
-    totalCestas
-  });
-
-  if (loading) {
-    return <p> Carregando doadores...</p>;
-  }
-
-  if (error) {
-    return <p>❌ Erro: {error}</p>;
-  }
-
-  if (!donors || donors.length === 0) {
-    return <p>⚠️ Nenhum doador encontrado</p>;
-  }
-
-  return (
-    <div>
-      <h2 className="text-xl font-bold mb-4">Lista de Doadores</h2>
-      <table className="table-auto w-full border border-gray-300">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="px-4 py-2 border">Nome</th>
-            <th className="px-4 py-2 border">Valor</th>
-            <th className="px-4 py-2 border">Data</th>
-            <th className="px-4 py-2 border">Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          {donors.map((donor) => (
-            <tr key={donor.id}>
-              <td className="px-4 py-2 border">{donor.name}</td>
-              <td className="px-4 py-2 border">R$ {donor.amount.toFixed(2)}</td>
-              <td className="px-4 py-2 border">{donor.date}</td>
-              <td className="px-4 py-2 border">{donor.email || "-"}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="mt-4">
-        <p>
-          💰 <strong>Total arrecadado:</strong> R$ {totalArrecadado.toFixed(2)}
-        </p>
-        <p>
-          🛒 <strong>Total de cestas:</strong> {totalCestas}
-        </p>
-        {lastUpdated && (
-          <p>⏱️ Última atualização: {lastUpdated.toLocaleString()}</p>
-        )}
-      </div>
-    </div>
-  );
-}
+    totalCestas,
+  };
+};
