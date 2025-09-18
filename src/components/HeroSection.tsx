@@ -3,7 +3,7 @@ import { Heart, Copy, CheckCircle } from 'lucide-react';
 
 const HeroSection = () => {
   const [pixCopied, setPixCopied] = useState(false);
-  const pixKey = "usuario@email.com"; // Substitua pela chave Pix real
+  const pixKey = "011.970.271-14"; // Substitua pela chave Pix real
 
   const copyPix = () => {
     navigator.clipboard.writeText(pixKey);
