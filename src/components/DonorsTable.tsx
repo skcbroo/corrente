@@ -31,9 +31,11 @@ const DonorsTable = () => {
     });
   };
 
+    
   const getCestasFromAmount = (amount: number) => {
-    return Math.floor(amount / 47);
+    return (amount / 47).toFixed(1); // retorna string com 1 casa decimal
   };
+
 
   return (
     <section className="bg-gradient-to-br from-white via-blue-50 to-green-50 py-20 px-4 relative overflow-hidden">
