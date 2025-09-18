@@ -97,6 +97,9 @@ const HeroSection = () => {
               </>
             )}
           </button>
+             <p className="text-sm text-gray-600 mt-6 font-medium">
+            Clique para copiar a chave PIX e fazer sua doação
+          </p>
 
           {/* 🔹 NOVA SEÇÃO: Envio do comprovante */}
           <div className="mt-10 bg-green-50 border border-green-200 rounded-xl p-6 shadow-md">
@@ -112,9 +115,7 @@ const HeroSection = () => {
             </p>
           </div>
 
-          <p className="text-sm text-gray-600 mt-6 font-medium">
-            Clique para copiar a chave PIX e fazer sua doação
-          </p>
+       
         </div>
       </div>
     </section>
